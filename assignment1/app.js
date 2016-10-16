@@ -6,32 +6,49 @@ angular.module('LunchCheck', [])
 
 LunchCheckerController.$inject = ['$scope'];
 function LunchCheckerController($scope) {
-  $scope.lunch = "item1, item2, item3";
-  $scope.items = '';
-  $scope.numitems = 0;
+  $scope.lunch = "";
+  //$scope.items = '';
+  //$scope.numitems = 0;
   $scope.message = '';
+  $scope.myColor = 'black';
+  $scope.myBdColor = 'lightgrey';
 
   $scope.checkLunch = function() {
     console.log("checkLunch() has been called")
 
     // Split lunch into items
-    if ($scope.lunch == '') {
-      $scope.items = '';
-    } else {
-      $scope.items = $scope.lunch.split(",");
-    }
+    var items = '';
+    if ($scope.lunch != '') {
+      items = $scope.lunch.split(",");
+    };
 
     // Determine the number of items
-    $scope.numitems = $scope.items.length;
+    // $scope.numitems = $scope.items.length;
+    var cnt = 0;
+    for (var i in items) {
+      //console.log(items[i].length);
+      if (items[i].length > 0) {
+        cnt += 1;
+      };
+    };
+
+    //$scope.numitems = cnt;
+    //$scope.items = items;
+
+    // Set default color
+    $scope.myColor = 'green';
+    $scope.myBdColor = 'green';
 
     // Set message based on number of items
-    if ($scope.numitems > 3) {
+    if (cnt > 3) {
       $scope.message = "Too much!";
-    } else if ($scope.numitems == 0) {
-      $scope.message = "";
+    } else if (cnt == 0) {
+      $scope.myColor = 'red';
+      $scope.myBdColor = 'red';
+      $scope.message = "Please enter data first.";
     } else {
-      $scope.message = "Enjoy";
-    }
+      $scope.message = "Enjoy!";
+    };
   };
 }
 
