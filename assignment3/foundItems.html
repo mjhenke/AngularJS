@@ -1,0 +1,13 @@
+<h3>List of Matching Menu Items</h3>
+<ul class="list-group">
+  <li ng-repeat="item in menu.found">
+    (<a href="" ng-click="">{{ item.short_name }}</a>)
+    {{ item.name }} - {{ item.description }}. &nbsp
+    <button ng-click="menu.onRemove({index: $index});">
+      Don't want this one!
+    </button>
+  </li>
+</ul>
+<div ng-if="menu.errorMessage"
+     class="error">Error: {{menu.errorMessage}}
+</div>
